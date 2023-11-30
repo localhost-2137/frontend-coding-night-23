@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #2e2f30;
+  overflow-x: hidden;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+a {
+  color: #fff;
+}
+
+.privacy-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #8400fc 0%, #e27bfc 100%);
+}
+
+.roboto {
+  font-family: "Roboto Slab", serif;
+}
+
+.quicksand {
+  font-family: "Quicksand", sans-serif;
+}
+
+.link {
+  transition: all 400ms linear;
+  background: linear-gradient(90deg, #7100db 0%, #ba64cf 25%, #393a3a 50%);
+  background-size: 400% 400%;
+}
