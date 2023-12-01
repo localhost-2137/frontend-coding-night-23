@@ -28,8 +28,8 @@ export default function Button({
       to={to || "/"}
       className={`${
         type === "alt"
-          ? "active:scale-90 transition-all border-purple-600 border-2 text-2xl p-2 text-purple-600 box-border font-sans rounded-lg"
-          : "active:scale-90 transition-all bg-purple-600 text-2xl p-2 text-white font-sans rounded-lg box-border border-2 border-purple-600"
+          ? "active:scale-90 transition-all border-amber-600 border-2 text-2xl p-2 text-amber-600 box-border font-sans rounded-lg"
+          : "active:scale-90 transition-all bg-amber-600 text-2xl p-2 text-white font-sans rounded-lg box-border border-2 border-amber-600"
       } flex items-center justify-center gap-2 box-border ${className} ${
         width || "sm:w-96 w-72"
       }`}
@@ -44,8 +44,8 @@ export default function Button({
       disabled={disabled}
       className={`${
         type === "alt"
-          ? "active:scale-90 transition-all border-purple-600 border-2 text-2xl p-2 text-purple-600 box-border font-sans rounded-lg"
-          : "active:scale-90 transition-all bg-purple-600 text-2xl p-2 text-white font-sans rounded-lg box-border border-2 border-purple-600"
+          ? "active:scale-90 transition-all border-amber-600 border-2 text-2xl p-2 text-amber-600 box-border font-sans rounded-lg"
+          : "active:scale-90 transition-all bg-amber-600 text-2xl p-2 text-white font-sans rounded-lg box-border border-2 border-amber-600"
       } flex gap-2 items-center justify-center box-border ${className}  ${
         width || "sm:w-96 w-72"
       } ${disabled && "!bg-gray-500 !border-gray-500"}`}

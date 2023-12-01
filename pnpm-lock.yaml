@@ -17,6 +17,9 @@ dependencies:
   react-avatar:
     specifier: ^5.0.3
     version: 5.0.3(@babel/runtime@7.23.5)(core-js-pure@3.33.3)(prop-types@15.8.1)(react@18.2.0)
+  react-avatar-editor:
+    specifier: 14.0.0-beta.5
+    version: 14.0.0-beta.5(react-dom@18.2.0)(react@18.2.0)
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
@@ -2046,6 +2049,16 @@ packages:
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
+
+  /react-avatar-editor@14.0.0-beta.5(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-pntWo3iPrOyk6z+X7SwsFV8zaDnUp6GgupI7qDr4uba4d0eSJoIpxE8fxKb4c1KAZkA1vxTeQCBpu51R9GYaUw==}
+    peerDependencies:
+      react: ^0.14.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^0.14.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /react-avatar@5.0.3(@babel/runtime@7.23.5)(core-js-pure@3.33.3)(prop-types@15.8.1)(react@18.2.0):
     resolution: {integrity: sha512-DNc+qkWH9QehSEZqHBhqpXWsPY+rU9W7kD68QFHfu8Atfsvx/3ML0DzAePgTUd96nCXQQ3KZMcC3LKYT8FiBIg==}

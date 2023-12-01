@@ -6,6 +6,8 @@ import Header from "./Layout/Header";
 import Login from "./Pages/Auth/Login";
 import Register from "./Pages/Auth/Register";
 import Home from "./Pages/Home/Home";
+import Profile from "./Pages/Profile/Profile";
+import Settings from "./Pages/Profile/Settings";
 
 export default function App() {
   const element = useRoutes([
@@ -16,6 +18,14 @@ export default function App() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/profile/:userId",
+          element: <Profile />,
+        },
+        {
+          path: "/settings",
+          element: <Settings />,
         },
       ],
     },
