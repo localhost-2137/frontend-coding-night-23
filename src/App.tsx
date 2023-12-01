@@ -9,6 +9,7 @@ import Home from "./Pages/Home/Home";
 import HomeScheme from "./Pages/HomeScheme/HomeScheme.tsx";
 import AddRoomSidebar from "./Pages/HomeScheme/Components/Sidebars/AddRoomSidebar.tsx";
 import LiveStatsSidebar from "./Pages/HomeScheme/Components/Sidebars/LiveStatsSidebar.tsx";
+import Rooms from "./Pages/Rooms/Rooms.tsx";
 
 
 export default function App() {
@@ -41,8 +42,8 @@ export default function App() {
                     ]
                 },
                 {
-                    path: "/devices",
-                    element: <h1>Devices</h1>,
+                    path: "/rooms",
+                    element: <Rooms />,
                 },
                 {
                     path: "/plan",
