@@ -5,7 +5,14 @@ import three from "../Assets/3.svg";
 import four from "../Assets/4.svg";
 import five from "../Assets/5.svg";
 import six from "../Assets/6.svg";
-import { TbArrowDown, TbArrowUp, TbDropletHalf2Filled, TbEdit, TbThermometer, TbTrashFilled } from "react-icons/tb";
+import {
+  TbArrowDown,
+  TbArrowUp,
+  TbDropletHalf2Filled,
+  TbEdit,
+  TbThermometer,
+  TbTrashFilled,
+} from "react-icons/tb";
 import { useState } from "react";
 import Button from "../../../Components/Button";
 
@@ -17,9 +24,25 @@ interface Room {
   imageId: number;
 }
 
-export default function Room({ room, i }: { room: Room; i: number }) {
+export default function Room({
+  room,
+  i,
+  setIsUserUpsertingRoom,
+  setEditingRoomIndex,
+}: {
+  room: Room;
+  i: number;
+  setIsUserUpsertingRoom: (arg: boolean) => void;
+  setEditingRoomIndex: (arg: number) => void;
+}) {
   const [isCelcius, setIsCelcius] = useState<boolean>(true);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  function deleteHandler() {
+    if (confirm(`Are you sure you want to delete ${room.name}?`)) {
+      console.log("deleted");
+    }
+  }
 
   return (
     <motion.div
@@ -68,8 +91,17 @@ export default function Room({ room, i }: { room: Room; i: number }) {
           Close
           <TbArrowDown />
         </p>
-        <TbTrashFilled className="absolute right-10 top-2 text-2xl text-gray-500 hover:text-white transition-colors cursor-pointer" />
-        <TbEdit className="absolute right-2 top-2 text-2xl text-gray-500 hover:text-white transition-colors cursor-pointer" />
+        <TbTrashFilled
+          className="absolute right-10 top-2 text-2xl text-gray-500 hover:text-amber-500 transition-colors cursor-pointer"
+          onClick={deleteHandler}
+        />
+        <TbEdit
+          onClick={() => {
+            setIsUserUpsertingRoom(true);
+            setEditingRoomIndex(i);
+          }}
+          className="absolute right-2 top-2 text-2xl text-gray-500 hover:text-amber-500 transition-colors cursor-pointer"
+        />
         <p className="text-2xl text-white quicksand capitalize font-semibold w-full text-ellipsis overflow-hidden">
           {room.name}
         </p>

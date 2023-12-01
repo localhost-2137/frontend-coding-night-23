@@ -46,8 +46,3 @@ a {
   background: linear-gradient(90deg, #cf9a11 0%, #9a3412 25%, #393a3a 50%);
   background-size: 400% 400%;
 }
-
-.text-col {
-  writing-mode: vertical-rl;
-  text-orientation: upright;
-}
