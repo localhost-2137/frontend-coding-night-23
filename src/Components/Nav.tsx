@@ -108,7 +108,7 @@ export default function Nav({
           isShown
             ? "right-0 "
             : "xl:-right-1/4 lx:-right-1/3 md:-right-1/2 -right-full"
-        } bg-bgLght transition-all`}
+        } bg-bgClr transition-all`}
       >
         <div
           onClick={() => setIsShown(false)}
