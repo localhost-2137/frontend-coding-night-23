@@ -1,8 +1,8 @@
 import {useState} from "react";
 import {motion, useIsPresent} from "framer-motion";
-import RoomBox from "./Components/RoomBox.tsx";
 import GridSquare from "./Components/GridSquare.tsx";
 import GridRoom from "./Components/GridRoom.tsx";
+import {Outlet} from "react-router-dom";
 
 interface SelectedRoom {
     id: number;
@@ -26,9 +26,9 @@ export default function HomeScheme() {
     }
 
     const staticSquares: Square[] = []
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 30; i++) {
         staticSquares.push({
-            id: i,
+            id: Date.now() + i,
             posX: i % 10,
             posY: Math.floor(i / 10),
             room: null
@@ -39,16 +39,11 @@ export default function HomeScheme() {
 
     return (
         <div className="w-full flex h-full">
-            <div className="w-[25%] bg-gray-500 h-full px-4 py-4">
-                <h2>Select room</h2>
-                <div className="grid grid-cols-2 gap-4 py-6">
-                    <RoomBox title="Single Room"/>
-                </div>
-            </div>
-            <div className="w-[75%] bg-green-800 grid grid-cols-10">
+            <Outlet/>
+            <div className="w-[75%] bg-gray-700 grid grid-cols-6">
                 {squares.length && squares.map(square => {
                     return (
-                        square.room ? <GridRoom id={square.room.id} title={square.room.title}/> :
+                        square.room ? <GridRoom key={square.room.id} id={square.room.id} title={square.room.title}/> :
                             <GridSquare key={square.id} posX={square.posX} posY={square.posY} onClick={() => {
                                 setSquares(prevState => {
                                     const newSquares = [...prevState]

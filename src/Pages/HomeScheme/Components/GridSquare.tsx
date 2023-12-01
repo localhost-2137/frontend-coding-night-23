@@ -6,7 +6,7 @@ interface GridSquareProps {
 
 export default function GridSquare({onClick}: GridSquareProps) {
     return (
-        <div onClick={onClick} className={"w-full h-full border-2 border-black opacity-10 cursor-pointer"}>
+        <div onClick={onClick} className={"w-full h-full border-2 border-white opacity-20 cursor-pointer"}>
 
         </div>
     )
