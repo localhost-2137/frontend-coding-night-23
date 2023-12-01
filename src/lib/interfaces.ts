@@ -3,6 +3,12 @@ export interface SelectedRoom {
     title: string;
 }
 
+export interface Room {
+    id: number;
+    title: string;
+    isLocked: boolean;
+}
+
 export interface Square {
     id: number;
     posX: number;
