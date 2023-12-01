@@ -1,31 +1,17 @@
-import {useState} from "react";
 import {motion, useIsPresent} from "framer-motion";
 import GridSquare from "./Components/GridSquare.tsx";
 import GridRoom from "./Components/GridRoom.tsx";
 import {Outlet} from "react-router-dom";
-import {Square} from "../../lib/interfaces.ts";
-import {selectedRoomAtom} from "../../Atoms.ts";
+import {selectedRoomAtom, roomsAtom, squaresAtom} from "../../Atoms.ts";
 import {useAtom} from "jotai";
 
 
 export default function HomeScheme() {
 
     const isPresent = useIsPresent();
-    const [selectedRoom,] = useAtom(selectedRoomAtom)
-
-    console.log(selectedRoom)
-
-    const staticSquares: Square[] = []
-    for (let i = 0; i < 30; i++) {
-        staticSquares.push({
-            id: Date.now() + i,
-            posX: i % 10,
-            posY: Math.floor(i / 10),
-            room: null
-        })
-    }
-
-    const [squares, setSquares] = useState<Square[]>([...staticSquares])
+    const [selectedRoom, setSelectedRoom,] = useAtom(selectedRoomAtom)
+    const [, setRooms] = useAtom(roomsAtom)
+    const [squares, setSquares] = useAtom(squaresAtom)
 
     return (
         <div className="w-full flex h-full">
@@ -42,6 +28,13 @@ export default function HomeScheme() {
                                         newSquares[index].room = selectedRoom
                                         return newSquares
                                     })
+                                    setRooms(prevState => {
+                                        const newRooms = [...prevState]
+                                        const index = newRooms.findIndex(room => room.id === selectedRoom.id)
+                                        newRooms[index].isLocked = true
+                                        return newRooms
+                                    })
+                                    setSelectedRoom(null)
                                 } else {
                                     console.error("No room selected")
                                 }

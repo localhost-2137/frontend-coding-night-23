@@ -13,11 +13,7 @@ import LiveStatsSidebar from "./Pages/HomeScheme/Components/Sidebars/LiveStatsSi
 
 export default function App() {
     const element = useRoutes([
-      {
-        path: "/",
-        element: <Header />,
-        children: [
-          {
+        {
             path: "/",
 
             element: <Header/>,
