@@ -36,19 +36,20 @@ export default function AddRoomSidebar() {
     }, []);
 
     return (
-        <div className="w-[25%] bg-gray-800 h-full px-6 py-4 border-r-2 border-r-amber-600">
-            <div className="w-full flex gap-4 justify-center items-center py-6">
+        <div className="md:w-[25%] w-full bg-gray-800 md:h-full h-[30%] overflow-auto px-6 py-4 text-white md:border-r-2 md:border-r-amber-600
+        border-b-2 border-b-amber-600">
+            <div className="w-full flex-col px-4 xl:flex-row flex gap-4 justify-center items-center py-6">
                 <Button
                     type={location.pathname === "/home-scheme/room" ? "default" : "alt"} isLink={true}
-                    className={`px-3 py-1.5 rounded`}
+                    className={`px-3 py-1.5 rounded`} width={"w-full"}
                     to="/home-scheme/room">Setup rooms</Button>
                 <Button
                     type={location.pathname === "/home-scheme/stats" ? "default" : "alt"} isLink={true}
-                    className={`px-3 py-1.5 rounded`}
+                    className={`px-3 py-1.5 rounded`} width={"w-full"}
                     to="/home-scheme/stats">Show stats</Button>
             </div>
             <h2 className="text-2xl pt-4">Select room</h2>
-            <div className="grid grid-cols-2 gap-4 py-6">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 py-6">
                 {rooms.map((room) => (
                     <RoomBox isLocked={room.isLocked} active={selectedRoom && selectedRoom.id === room.id || false}
                              key={room.id}

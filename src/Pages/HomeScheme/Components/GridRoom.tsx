@@ -47,7 +47,7 @@ export default function GridRoom({id, title}: GridRoomProps) {
                     className="absolute top-0 text-center right-0 w-4 h-4 rounded p-3 flex justify-center items-center bg-red-700">
                     <span><TbX/></span>
                 </div>}
-                <span className="text-green-700 absolute bottom-8 text-3xl"><TbUserHexagon/></span>
+                <span className="text-green-700 absolute bottom-8 text-xl"><TbUserHexagon/></span>
             </div>
         </div>
     )

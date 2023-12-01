@@ -14,9 +14,9 @@ export default function HomeScheme() {
     const [squares, setSquares] = useAtom(squaresAtom)
 
     return (
-        <div className="w-full flex h-full">
+        <div className="w-full flex flex-col md:flex-row h-full">
             <Outlet/>
-            <div className="w-[75%] bg-gray-700 grid grid-cols-6">
+            <div className="md:w-[75%] w-full h-full bg-gray-700 grid grid-cols-6">
                 {squares.length && squares.map(square => {
                     return (
                         square.room ? <GridRoom key={square.room.id} id={square.room.id} title={square.room.title}/> :
