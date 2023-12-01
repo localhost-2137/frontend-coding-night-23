@@ -3,27 +3,17 @@ import {motion, useIsPresent} from "framer-motion";
 import GridSquare from "./Components/GridSquare.tsx";
 import GridRoom from "./Components/GridRoom.tsx";
 import {Outlet} from "react-router-dom";
+import {Square} from "../../lib/interfaces.ts";
+import {selectedRoomAtom} from "../../Atoms.ts";
+import {useAtom} from "jotai";
 
-interface SelectedRoom {
-    id: number;
-    title: string;
-}
-
-interface Square {
-    id: number;
-    posX: number;
-    posY: number;
-    room: SelectedRoom | null;
-}
 
 export default function HomeScheme() {
 
     const isPresent = useIsPresent();
+    const [selectedRoom,] = useAtom(selectedRoomAtom)
 
-    let selectedRoom: SelectedRoom = {
-        id: 1,
-        title: "Single Room",
-    }
+    console.log(selectedRoom)
 
     const staticSquares: Square[] = []
     for (let i = 0; i < 30; i++) {
@@ -45,12 +35,16 @@ export default function HomeScheme() {
                     return (
                         square.room ? <GridRoom key={square.room.id} id={square.room.id} title={square.room.title}/> :
                             <GridSquare key={square.id} posX={square.posX} posY={square.posY} onClick={() => {
-                                setSquares(prevState => {
-                                    const newSquares = [...prevState]
-                                    const index = square.posX + square.posY * 10
-                                    newSquares[index].room = selectedRoom
-                                    return newSquares
-                                })
+                                if (selectedRoom) {
+                                    setSquares(prevState => {
+                                        const newSquares = [...prevState]
+                                        const index = square.posX + square.posY * 10
+                                        newSquares[index].room = selectedRoom
+                                        return newSquares
+                                    })
+                                } else {
+                                    console.error("No room selected")
+                                }
                             }}/>
                     )
                 })}
