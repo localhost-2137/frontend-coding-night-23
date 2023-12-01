@@ -5,8 +5,9 @@ import three from "../Assets/3.svg";
 import four from "../Assets/4.svg";
 import five from "../Assets/5.svg";
 import six from "../Assets/6.svg";
-import { TbDropletHalf2Filled, TbThermometer } from "react-icons/tb";
+import { TbArrowDown, TbArrowUp, TbDropletHalf2Filled, TbEdit, TbThermometer, TbTrashFilled } from "react-icons/tb";
 import { useState } from "react";
+import Button from "../../../Components/Button";
 
 interface Room {
   id: number;
@@ -18,6 +19,7 @@ interface Room {
 
 export default function Room({ room, i }: { room: Room; i: number }) {
   const [isCelcius, setIsCelcius] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <motion.div
@@ -45,7 +47,29 @@ export default function Room({ room, i }: { room: Room; i: number }) {
       }}
       className="group w-[400px] h-[300px] bg-[length:200px_150px] overflow-hidden relative bg-center bg-no-repeat border-4 border-bgLght rounded-xl"
     >
-      <div className="absolute w-full h-full left-0 -bottom-[80%] group-hover:!bottom-0 group-hover:border-bgLght transition-all duration-300 px-4 py-2 bg-[#2e2f30ee] border-t-2 border-amber-500">
+      <div
+        className={`${
+          isOpen
+            ? "bottom-0 border-transparent"
+            : "-bottom-[80%] border-amber-500"
+        } absolute w-full h-full left-0 md:-bottom-[80%] md:group-hover:!bottom-0 md:group-hover:border-transparent transition-all duration-300 px-4 py-2 bg-[#2e2f30ee] border-t-2 md:border-amber-500`}
+      >
+        <p
+          className="absolute -top-10 md:hidden cursor-pointer text-white flex items-center gap-2 border-bgLght border-2 bg-bgClr px-2 rounded-full"
+          onClick={() => setIsOpen(true)}
+        >
+          <TbArrowUp />
+          Open
+        </p>
+        <p
+          className="absolute top-14 right-2 md:hidden cursor-pointer text-white flex items-center gap-2 border-bgLght border-2 bg-bgClr px-2 rounded-full"
+          onClick={() => setIsOpen(false)}
+        >
+          Close
+          <TbArrowDown />
+        </p>
+        <TbTrashFilled className="absolute right-10 top-2 text-2xl text-gray-500 hover:text-white transition-colors cursor-pointer" />
+        <TbEdit className="absolute right-2 top-2 text-2xl text-gray-500 hover:text-white transition-colors cursor-pointer" />
         <p className="text-2xl text-white quicksand capitalize font-semibold w-full text-ellipsis overflow-hidden">
           {room.name}
         </p>
@@ -78,6 +102,14 @@ export default function Room({ room, i }: { room: Room; i: number }) {
             °F
           </p>
         </div>
+        <Button
+          isLink
+          to={`/room/${room.id}`}
+          className="mt-4 !w-2/3 mx-auto"
+          type="alt"
+        >
+          More info
+        </Button>
       </div>
     </motion.div>
   );

@@ -54,7 +54,7 @@ export default function Rooms() {
           initial={{ opacity: 0.5, bottom: -50 }}
           animate={{ opacity: 1, bottom: 0 }}
           transition={{ duration: 0.2 }}
-          className="2xl:w-1/3 xl:w-1/2 w-full xl:h-4/5 h-full xl:border-4 border-amber-600 xl:rounded-xl bg-bgClr p-6 relative flex flex-col gap-4 items-center justify-center"
+          className="2xl:w-1/3 xl:w-1/2 w-full xl:h-4/5 h-full xl:border-4 border-bgLght xl:rounded-xl bg-bgClr py-28 px-8 relative flex flex-col gap-4 items-center xl:justify-between justify-center"
         >
           <TbX
             className="text-2xl text-white absolute right-6 top-6 cursor-pointer"
@@ -131,10 +131,10 @@ export default function Rooms() {
             <TbDeviceFloppy />
             Add Room
           </Button>
-          <p className="text-white xl:!w-2/3 lg:w-1/3 sm:w-1/2 w-full">
+          <p className="text-gray-400 xl:!w-2/3 lg:w-1/3 sm:w-1/2 w-full">
             *Room name is arbitrary and depends on the user.
           </p>
-          <p className="text-white xl:!w-2/3 lg:w-1/3 sm:w-1/2 w-full">
+          <p className="text-gray-400 xl:!w-2/3 lg:w-1/3 sm:w-1/2 w-full">
             **Device code should be written on the sheet of paper included in
             the set.
           </p>
