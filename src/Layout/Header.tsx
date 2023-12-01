@@ -26,9 +26,9 @@ export default function Header() {
 
   return (
     <>
-      <header className="w-screen border-b-2 border-amber-400 flex justify-between items-center sm:px-8 px-4 py-2">
+      <header className="w-screen border-b-2 border-amber-600 flex justify-between items-center sm:px-8 px-4 py-2">
         <Link to="/" className="flex items-center w-fit">
-          <h1 className="roboto text-3xl">Header</h1>
+          <h1 className="roboto text-3xl">Home Lord</h1>
         </Link>
         <Nav user={user} logout={logout} />
       </header>

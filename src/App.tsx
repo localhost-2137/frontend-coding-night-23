@@ -17,6 +17,18 @@ export default function App() {
                     path: "/",
                     element: <Home/>,
                 },
+                {
+                    path: "/home-scheme",
+                    element: <h1>Home scheme</h1>,
+                },
+                {
+                    path: "/devices",
+                    element: <h1>Devices</h1>,
+                },
+                {
+                    path: "/plan",
+                    element: <h1>Plan</h1>,
+                }
             ],
         },
         {
@@ -27,6 +39,7 @@ export default function App() {
             path: "/register",
             element: <Register/>,
         },
+
     ]);
 
     const location = useLocation();

@@ -14,9 +14,9 @@ import AvatarComponent from "./AvatarComponent";
 import Button from "./Button";
 
 const navigationLinks = [
-    {to: "/a", label: "Home Scheme", icon: TbHome},
-    {to: "/b", label: "Devices", icon: TbRouter},
-    {to: "/c", label: "Plan", icon: TbNotebook},
+    {to: "/home-scheme", label: "Home Scheme", icon: TbHome},
+    {to: "/devices", label: "Devices", icon: TbRouter},
+    {to: "/plan", label: "Plan", icon: TbNotebook},
 ];
 
 export default function Nav({
