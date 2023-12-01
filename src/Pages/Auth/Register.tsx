@@ -42,6 +42,7 @@ export default function Register() {
       return;
     }
     setIsLoading(true);
+    const names = usernameRef.current?.value.split(" ");
     fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
       method: "POST",
       headers: {
@@ -51,7 +52,8 @@ export default function Register() {
       body: JSON.stringify({
         email: emailRef.current?.value,
         password: passwordRef.current?.value,
-        username: usernameRef.current?.value,
+        name: names[0],
+        lastname: names[1],
       }),
     })
       .then((res) => res.json())
@@ -86,7 +88,7 @@ export default function Register() {
         </Link>
         <h1 className="text-7xl mb-16 roboto">Register</h1>
         <Input
-          placeholder="Username"
+          placeholder="First & Last name"
           ref={usernameRef}
           disabled={isLoading}
           containerClassName="sm:w-96 w-72"

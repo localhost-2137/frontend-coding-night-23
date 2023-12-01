@@ -30,7 +30,7 @@ a {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, #fde047 0%, #9a3412 100%);
+  background: linear-gradient(45deg, #fbbf24 0%, #9a3412 100%);
 }
 
 .roboto {
@@ -43,6 +43,6 @@ a {
 
 .link {
   transition: all 400ms linear;
-  background: linear-gradient(90deg, #fde047 0%, #9a3412 25%, #393a3a 50%);
+  background: linear-gradient(90deg, #fbbf24 0%, #9a3412 25%, #393a3a 50%);
   background-size: 400% 400%;
 }

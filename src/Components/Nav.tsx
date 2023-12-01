@@ -26,7 +26,7 @@ export default function Nav({
   user,
   logout,
 }: {
-  user: { username: string; id: string };
+  user: { email: string; id: string };
   logout: () => void;
 }) {
   const [isShown, setIsShown] = useState(false);
@@ -62,25 +62,18 @@ export default function Nav({
         <p className="sm:block hidden">Open menu</p>
         <TbMenu2 />
       </div>
-      {user.username ? (
+      {user.email ? (
         <div className="hidden lg:flex items-center gap-8 roboto text-3xl">
-          <NavLink
-            to={`/profile/${user.id}`}
-            className={({ isActive }) =>
-              `flex items-center gap-2 transition ${
-                isActive ? "text-gray-100" : "text-gray-400"
-              } `
-            }
-          >
+          <span className="flex items-center gap-2">
             <AvatarComponent
               userId={+(user.id || -10)}
-              username={user.username}
+              username={user.email}
               size="small"
             />
             <p className="max-w-[200px] text-ellipsis overflow-hidden">
-              {user.username}
+              {user.email}
             </p>
-          </NavLink>
+          </span>
           <Button
             type="default"
             className="roboto text-center"
@@ -141,25 +134,18 @@ export default function Nav({
             {link.label}
           </NavLink>
         ))}
-        {user.username ? (
+        {user.email ? (
           <div className="lg:hidden flex flex-col items-center gap-8 roboto text-3xl">
-            <NavLink
-              to={`/profile/${user.id}`}
-              className={({ isActive }) =>
-                `flex items-center gap-2 transition ${
-                  isActive ? "text-gray-100" : "text-gray-400"
-                } `
-              }
-            >
+            <span className="flex items-center gap-2">
               <AvatarComponent
                 userId={+(user.id || -10)}
-                username={user.username}
+                username={user.email}
                 size="small"
               />
               <p className="max-w-[250px] text-ellipsis overflow-hidden">
-                {user.username}
+                {user.email}
               </p>
-            </NavLink>
+            </span>
             <Button
               type="default"
               className="roboto text-center"
