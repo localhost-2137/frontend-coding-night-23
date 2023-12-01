@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         bgClr: "#2e2f30",
-        bgLght: "#393a3a",
+        bgLght: "#525252",
       },
     },
   },
