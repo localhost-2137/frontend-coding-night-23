@@ -6,6 +6,7 @@ import Header from "./Layout/Header";
 import Login from "./Pages/Auth/Login";
 import Register from "./Pages/Auth/Register";
 import Home from "./Pages/Home/Home";
+import HomeScheme from "./Pages/HomeScheme/HomeScheme.tsx";
 
 export default function App() {
     const element = useRoutes([
@@ -19,7 +20,7 @@ export default function App() {
                 },
                 {
                     path: "/home-scheme",
-                    element: <h1>Home scheme</h1>,
+                    element: <HomeScheme/>,
                 },
                 {
                     path: "/devices",
