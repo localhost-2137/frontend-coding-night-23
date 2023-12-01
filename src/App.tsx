@@ -10,10 +10,16 @@ import HomeScheme from "./Pages/HomeScheme/HomeScheme.tsx";
 import AddRoomSidebar from "./Pages/HomeScheme/Components/Sidebars/AddRoomSidebar.tsx";
 import LiveStatsSidebar from "./Pages/HomeScheme/Components/Sidebars/LiveStatsSidebar.tsx";
 
+
 export default function App() {
     const element = useRoutes([
-        {
+      {
+        path: "/",
+        element: <Header />,
+        children: [
+          {
             path: "/",
+
             element: <Header/>,
             children: [
                 {
