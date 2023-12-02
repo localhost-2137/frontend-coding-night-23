@@ -105,6 +105,7 @@ export default function RoomInfo() {
     colors: ["#ff8c00", "#00bfff"],
   };
 
+  // @ts-ignore
   return (
     <div className="flex-1 flex flex-col w-2/3 gap-16 mx-auto py-8">
       <h1 className="text-4xl text-center roboto text-gray-100">
@@ -151,7 +152,7 @@ export default function RoomInfo() {
             Temperature:{" "}
             {isCelcius
               ? roomData?.temperature.toFixed(1) + "°C"
-              : (roomData?.temperature || 0 * 1.8 + 32).toFixed(1) + "°F"}
+              : ((roomData?.temperature || 0) * 1.8 + 32).toFixed(1) + "°F"}
             <TbThermometer />
           </p>
           <p className="text-3xl text-gray-100 quicksand flex items-center gap-2">
