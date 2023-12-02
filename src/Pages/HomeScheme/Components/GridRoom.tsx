@@ -19,6 +19,7 @@ export default function GridRoom({id, title, onClick}: GridRoomProps) {
     const [selectedStatsRoom,] = useAtom(selectedStatsRoomAtom)
     const [data, setData] = useState<any>({
         temperature: 0,
+        humidity: 0,
         watthour: 0,
         lastpresence: 0
     })
@@ -55,7 +56,7 @@ export default function GridRoom({id, title, onClick}: GridRoomProps) {
                     </div>
                     <div className="flex items-center gap-6">
                         <p>{data.temperature} °C</p>
-                        <p>{data.watthour} %</p>
+                        <p>{data.humidity} %</p>
                     </div>
                 </div>
                 {showDelete && <div
