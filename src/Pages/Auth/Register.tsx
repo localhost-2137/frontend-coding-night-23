@@ -115,7 +115,12 @@ export default function Register() {
           ref={repeatPasswordRef}
           containerClassName="sm:w-96 w-72"
         />
-        <ThreeDots height={40} width={40} visible={isLoading} color="#c084fc" />
+        <ThreeDots
+          height={40}
+          width={40}
+          visible={isLoading}
+          color="#f59e0b"
+        />
         <Button type="default" onClick={register} disabled={isLoading}>
           Register
         </Button>

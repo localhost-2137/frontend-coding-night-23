@@ -71,52 +71,57 @@ export default function Login() {
     };
 
     return (
-        <div className="w-screen h-screen flex">
-            <img
-                src={background}
-                className="xl:w-2/3 lg:w-1/2 hidden lg:block h-screen"
-                alt=""
-            />
-            <div className="xl:w-1/3 lg:w-1/2 w-screen flex flex-col items-center justify-center gap-6 relative">
-                <Link
-                    className="absolute top-4 left-4 text-gray-400 flex items-center gap-2 hover:text-white transition-all"
-                    to="/"
-                >
-                    <TbArrowLeft/>
-                    Back to home
-                </Link>
-                <h1 className="text-7xl mb-16 roboto">Login</h1>
-                <Input
-                    placeholder="E-mail"
-                    ref={emailRef}
-                    type="email"
-                    disabled={isLoading}
-                    containerClassName="sm:w-96 w-72"
-                />
-                <Input
-                    containerClassName="sm:w-96 w-72"
-                    placeholder="Password"
-                    type="password"
-                    disabled={isLoading}
-                    ref={passwordRef}
-                />
-                <ThreeDots height={40} width={40} visible={isLoading} color="#c084fc"/>
-                <Button type="default" onClick={login} disabled={isLoading}>
-                    Login
-                </Button>
-                <Link to="/register">Don't have account yet? Register</Link>
-                <Link to="/password/forgot">Forgot password?</Link>
-            </div>
-            <motion.div
-                initial={{scaleX: 1}}
-                animate={{
-                    scaleX: 0,
-                    transition: {duration: 0.6, ease: "circOut"},
-                }}
-                exit={{scaleX: 1, transition: {duration: 0.6, ease: "circIn"}}}
-                style={{originX: isPresent ? 0 : 1}}
-                className="privacy-screen bg-indigo-400 z-50"
-            />
+      <div className="w-screen h-screen flex">
+        <img
+          src={background}
+          className="xl:w-2/3 lg:w-1/2 hidden lg:block h-screen"
+          alt=""
+        />
+        <div className="xl:w-1/3 lg:w-1/2 w-screen flex flex-col items-center justify-center gap-6 relative">
+          <Link
+            className="absolute top-4 left-4 text-gray-400 flex items-center gap-2 hover:text-white transition-all"
+            to="/"
+          >
+            <TbArrowLeft />
+            Back to home
+          </Link>
+          <h1 className="text-7xl mb-16 roboto">Login</h1>
+          <Input
+            placeholder="E-mail"
+            ref={emailRef}
+            type="email"
+            disabled={isLoading}
+            containerClassName="sm:w-96 w-72"
+          />
+          <Input
+            containerClassName="sm:w-96 w-72"
+            placeholder="Password"
+            type="password"
+            disabled={isLoading}
+            ref={passwordRef}
+          />
+          <ThreeDots
+            height={40}
+            width={40}
+            visible={isLoading}
+            color="#f59e0b"
+          />
+          <Button type="default" onClick={login} disabled={isLoading}>
+            Login
+          </Button>
+          <Link to="/register">Don't have account yet? Register</Link>
+          <Link to="/password/forgot">Forgot password?</Link>
         </div>
+        <motion.div
+          initial={{ scaleX: 1 }}
+          animate={{
+            scaleX: 0,
+            transition: { duration: 0.6, ease: "circOut" },
+          }}
+          exit={{ scaleX: 1, transition: { duration: 0.6, ease: "circIn" } }}
+          style={{ originX: isPresent ? 0 : 1 }}
+          className="privacy-screen bg-indigo-400 z-50"
+        />
+      </div>
     );
 }

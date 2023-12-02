@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Room from "./Components/Room";
 import UpsertRoomModal from "./Components/UpsertRoomModal";
 import Loader from "../../Components/Loader";
+import { TbRefresh } from "react-icons/tb";
 
 interface Room {
   id: number;
@@ -46,6 +47,13 @@ export default function Rooms() {
 
   useEffect(() => {
     fetchRooms();
+    let interval = setInterval(() => {
+      fetchRooms();
+    }, 10000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, [isUserUpsertingRoom]);
 
   return (
@@ -57,36 +65,8 @@ export default function Rooms() {
           setEditingRoomIndex={setEditingRoomIndex}
         />
       )}
-      <Button
-        type="alt"
-        className="absolute right-8 top-4 !w-48"
-        onClick={() => setIsUserUpsertingRoom(true)}
-      >
-        Add Room
-      </Button>
-      <h2 className="text-center text-4xl roboto md:py-4 pb-4 py-20">Rooms</h2>
       <div className="w-full flex items-center justify-center flex-wrap gap-8 my-16 px-8">
-        {isFetching ? (
-          <Loader width="150" />
-        ) : rooms && rooms.length ? (
-          <AnimatePresence>
-            {rooms.map((room: Room, i: number) => {
-              return (
-                <Room
-                  room={room}
-                  i={i}
-                  key={Math.random()}
-                  setIsUserUpsertingRoom={setIsUserUpsertingRoom}
-                  setEditingRoomIndex={setEditingRoomIndex}
-                />
-              );
-            })}
-          </AnimatePresence>
-        ) : (
-          <p className="text-center text-bgLght text-5xl quicksand font-semibold mt-20">
-            No rooms found
-          </p>
-        )}
+        <TbRefresh className="absolute top-7 right-60 text-gray-100 text-4xl cursor-pointer" onClick={fetchRooms} />
         <Button
           type="alt"
           className="absolute right-8 top-4 !w-48"
@@ -98,14 +78,14 @@ export default function Rooms() {
           Rooms
         </h2>
         <div className="w-full flex items-center justify-center flex-wrap gap-8 my-16 px-8">
-          {rooms.length ? (
+          {isFetching ? <Loader width="150" /> : rooms.length ? (
             <AnimatePresence>
               {rooms.map((room: Room, i: number) => {
                 return (
                   <Room
                     room={room}
                     i={i}
-                    key={room.id}
+                    key={room.name}
                     setIsUserUpsertingRoom={setIsUserUpsertingRoom}
                     setEditingRoomIndex={setEditingRoomIndex}
                   />
