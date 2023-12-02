@@ -16,7 +16,7 @@ export default function HomeScheme() {
     return (
         <div className="w-full flex flex-col md:flex-row h-full">
             <Outlet/>
-            <div className="md:w-[75%] w-full h-full bg-gray-700 grid grid-cols-6">
+            <div className="md:w-[75%] w-full h-full bg-gray-700 grid grid-cols-5">
                 {squares.length && squares.map(square => {
                     return (
                         square.room ? <GridRoom key={square.room.id} id={square.room.id} title={square.room.title}/> :

@@ -1,7 +1,8 @@
-import {TbUserHexagon, TbX} from "react-icons/tb";
-import {useState} from "react";
+import { TbCircleFilled, TbX} from "react-icons/tb";
+import {useEffect, useState} from "react";
 import {roomsAtom, squaresAtom} from "../../../Atoms.ts";
 import {useAtom} from "jotai";
+import useFetch from "../../../hooks/useFetch.tsx";
 
 interface GridRoomProps {
     id: number;
@@ -13,8 +14,25 @@ export default function GridRoom({id, title}: GridRoomProps) {
     const [showDelete, setShowDelete] = useState(false)
     const [, setRooms] = useAtom(roomsAtom)
     const [, setSquares] = useAtom(squaresAtom)
+    const [data, setData] = useState<any>({
+        temperature: 0,
+        watthour: 0,
+        lastpresence: 0
+    })
+    const {response} = useFetch(`room?id=${id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+    }, 5000)
 
-    // TODO: fetch room data from API
+    useEffect(() => {
+        if(response) {
+            setData(response)
+            console.log(response)
+        }
+    }, [response]);
 
     return (
         <div onMouseOver={() => {
@@ -24,8 +42,18 @@ export default function GridRoom({id, title}: GridRoomProps) {
         }}
              className=" w-full h-full p-2">
             <div
-                className="relative w-full h-full border-4 border-black flex flex-col justify-center items-center text-white">
-                <h3>{title}</h3>
+                className="relative shadow w-full h-full bg-gray-800 rounded-xl border-4 border-black flex flex-col justify-center items-center text-white">
+                <div className="flex flex-col gap-3">
+                    <h3 className="text-xl text-center">{title}</h3>
+                    <div className="flex text-green-600 items-center justify-center gap-2">
+                       <TbCircleFilled/>
+                        <p>online</p>
+                    </div>
+                    <div className="flex items-center gap-6">
+                        <p>{data.temperature} °C</p>
+                        <p>{data.watthour} %</p>
+                    </div>
+                </div>
                 {showDelete && <div
                     onClick={() => {
                         setRooms(prevState => {
@@ -44,10 +72,10 @@ export default function GridRoom({id, title}: GridRoomProps) {
                             return newSquares
                         })
                     }}
-                    className="absolute top-0 text-center right-0 w-4 h-4 rounded p-3 flex justify-center items-center bg-red-700">
+                    className="absolute cursor-pointer top-0 text-center right-0 w-4 h-4 rounded p-3 flex justify-center items-center bg-red-700">
                     <span><TbX/></span>
                 </div>}
-                <span className="text-green-700 absolute bottom-8 text-xl"><TbUserHexagon/></span>
+
             </div>
         </div>
     )

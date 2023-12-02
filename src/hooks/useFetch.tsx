@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-export default function useFetch(path: string, options?: any) {
+export default function useFetch(path: string, options?: any, timeout?: number) {
 
     const [response, setResponse] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
@@ -8,6 +8,7 @@ export default function useFetch(path: string, options?: any) {
     const url = `${import.meta.env.VITE_API_URL}/${path}`;
 
     useEffect(() => {
+
         const fetchData = async () => {
             setLoading(true);
 
@@ -24,7 +25,13 @@ export default function useFetch(path: string, options?: any) {
             setResponse(json);
         };
 
-        fetchData();
+        if (timeout) {
+            setInterval(() => {
+                fetchData();
+            }, timeout)
+        } else {
+            fetchData();
+        }
     }, []);
 
     return {response, error, loading};

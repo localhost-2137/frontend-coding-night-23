@@ -7,7 +7,7 @@ const userAtom = atom(getUserObject());
 // atoms for home scheme
 const selectedRoomAtom = atom<SelectedRoom | null>(null);
 const roomsAtom = atom<Room[]>([]);
-const squaresAtom = atom<Square[]>(Array.from({length: 30}, (_v, i) => ({
+const squaresAtom = atom<Square[]>(Array.from({length: 25}, (_v, i) => ({
         id: Date.now() + i,
         posX: i % 10,
         posY: Math.floor(i / 10),
