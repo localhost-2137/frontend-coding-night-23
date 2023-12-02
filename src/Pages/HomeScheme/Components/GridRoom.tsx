@@ -60,9 +60,9 @@ export default function GridRoom({id, title, onClick}: GridRoomProps) {
                 className={`relative shadow w-full h-full bg-gray-800 rounded-xl ${selectedStatsRoom === id ? "border-amber-600" : "border-black"} border-4  flex flex-col justify-center items-center text-white`}>
                 <div className="flex flex-col gap-3">
                     <h3 className="text-xl text-center">{title}</h3>
-                    <div className="flex text-green-600 items-center justify-center gap-2">
+                    <div className={`flex ${Date.now() - data.lastpresence > 15000 ? "text-gray-400" : "text-green-600"} items-center justify-center gap-2`}>
                         <TbCircleFilled/>
-                        <p>online</p>
+                        <p className="text-white">{Date.now() - data.lastpresence > 15000 ? "offline" : "online"}</p>
                     </div>
                     <div className="flex items-center gap-6">
                         <p>{data.temperature.toFixed(2)} °C</p>
