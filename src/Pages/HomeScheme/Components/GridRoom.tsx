@@ -1,4 +1,4 @@
-import {TbCircleFilled, TbX} from "react-icons/tb";
+import {TbCircleFilled, TbDropletHalf2Filled, TbTemperature, TbX} from "react-icons/tb";
 import {useEffect, useState} from "react";
 import {roomsAtom, squaresAtom} from "../../../Atoms.ts";
 import {useAtom} from "jotai";
@@ -49,49 +49,65 @@ export default function GridRoom({id, title, onClick}: GridRoomProps) {
     }, [response]);
 
     return (
-        <div onClick={onClick}
-             onMouseOver={() => {
-                 setShowDelete(true)
-             }} onMouseOut={() => {
-            setShowDelete(false)
+      <div
+        onClick={onClick}
+        onMouseOver={() => {
+          setShowDelete(true);
         }}
-             className=" w-full h-full p-2 cursor-pointer">
-            <div
-                className={`relative shadow w-full h-full bg-gray-800 rounded-xl ${selectedStatsRoom === id ? "border-amber-600" : "border-black"} border-4  flex flex-col justify-center items-center text-white`}>
-                <div className="flex flex-col gap-3">
-                    <h3 className="text-xl text-center">{title}</h3>
-                    <div className="flex text-green-600 items-center justify-center gap-2">
-                        <TbCircleFilled/>
-                        <p>online</p>
-                    </div>
-                    <div className="flex items-center gap-6">
-                        <p>{data.temperature.toFixed(2)} °C</p>
-                        <p>{data.humidity.toFixed(2)} %</p>
-                    </div>
-                </div>
-                {showDelete && <div
-                    onClick={() => {
-                        setRooms(prevState => {
-                            const newRooms = [...prevState]
-                            const index = newRooms.findIndex(room => room.id === id)
-                            newRooms[index].isLocked = false
-                            return newRooms
-                        })
-                        setSquares(prevState => {
-                            const newSquares = [...prevState]
-                            newSquares.forEach(square => {
-                                if (square.room?.id === id) {
-                                    square.room = null
-                                }
-                            })
-                            return newSquares
-                        })
-                    }}
-                    className="absolute cursor-pointer top-0 text-center right-0 w-4 h-4 rounded p-3 flex justify-center items-center bg-red-700">
-                    <span><TbX/></span>
-                </div>}
-
+        onMouseOut={() => {
+          setShowDelete(false);
+        }}
+        className=" w-full h-full p-2 cursor-pointer"
+      >
+        <div
+          className={`relative shadow w-full h-full bg-gray-800 rounded-xl ${
+            selectedStatsRoom === id ? "border-amber-600" : "border-black"
+          } border-4  flex flex-col justify-center items-center text-white`}
+        >
+          <div className="flex flex-col gap-3">
+            <h3 className="text-xl text-center">{title}</h3>
+            <div className="flex text-green-600 items-center justify-center gap-2">
+              <TbCircleFilled />
+              <p>online</p>
             </div>
+            <div className="flex items-center flex-col gap-6">
+              <p className="flex gap-2 text-lg items-center">
+                <TbTemperature />
+                {data.temperature.toFixed(2)} °C
+              </p>
+              <p className="flex gap-2 text-lg items-center">
+                <TbDropletHalf2Filled />
+                {data.humidity.toFixed(2)} %
+              </p>
+            </div>
+          </div>
+          {showDelete && (
+            <div
+              onClick={() => {
+                setRooms((prevState) => {
+                  const newRooms = [...prevState];
+                  const index = newRooms.findIndex((room) => room.id === id);
+                  newRooms[index].isLocked = false;
+                  return newRooms;
+                });
+                setSquares((prevState) => {
+                  const newSquares = [...prevState];
+                  newSquares.forEach((square) => {
+                    if (square.room?.id === id) {
+                      square.room = null;
+                    }
+                  });
+                  return newSquares;
+                });
+              }}
+              className="absolute cursor-pointer top-0 text-center right-0 w-4 h-4 rounded p-3 flex justify-center items-center bg-red-700"
+            >
+              <span>
+                <TbX />
+              </span>
+            </div>
+          )}
         </div>
-    )
+      </div>
+    );
 }
