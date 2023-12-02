@@ -7,3 +7,7 @@ export function createCookie(name: string, value: any, days: number) {
     }
     document.cookie = name + "=" + (JSON.stringify(value) || "") + expires + "; path=/";
 }
+
+export function deleteCookie(name: string) {
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+}
