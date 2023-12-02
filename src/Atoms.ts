@@ -6,6 +6,7 @@ const userAtom = atom(getUserObject());
 
 // atoms for home scheme
 const selectedRoomAtom = atom<SelectedRoom | null>(null);
+const selectedStatsRoomAtom = atom<number | null>(null);
 const roomsAtom = atom<Room[]>([]);
 const squaresAtom = atom<Square[]>(Array.from({length: 25}, (_v, i) => ({
         id: Date.now() + i,
@@ -14,5 +15,6 @@ const squaresAtom = atom<Square[]>(Array.from({length: 25}, (_v, i) => ({
         room: null
     }))
 );
+const helpModalAtom = atom(false);
 
-export {userAtom, selectedRoomAtom, roomsAtom, squaresAtom};
+export {userAtom, selectedRoomAtom, roomsAtom, squaresAtom, selectedStatsRoomAtom, helpModalAtom};

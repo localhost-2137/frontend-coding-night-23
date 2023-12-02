@@ -1,9 +1,22 @@
 import {useLocation} from "react-router-dom";
 import Button from "../../../../Components/Button.tsx";
+import useFetch from "../../../../hooks/useFetch.tsx";
+import {selectedStatsRoomAtom} from "../../../../Atoms.ts";
+import {useAtom} from "jotai";
 
 export default function LiveStatsSidebar() {
 
+    const [selectedStatsRoom,] = useAtom(selectedStatsRoomAtom)
     const location = useLocation()
+    const {response} = useFetch(`room?id=${selectedStatsRoom}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+    }, 5000)
+
+    console.log(response)
 
     return (
         <div className="md:w-[25%] w-full bg-gray-800 md:h-full h-[30%] overflow-auto px-6 py-4 text-white md:border-r-2 md:border-r-amber-600
@@ -19,7 +32,7 @@ export default function LiveStatsSidebar() {
                     to="/home-scheme/stats">Show stats</Button>
             </div>
             <h2 className="text-2xl pt-4">Live statistics</h2>
-            <p className="py-6 text-gray-200">Select room from scheme to show.</p>
+            {selectedStatsRoom === null && <p className="py-6 text-gray-200">Select room from scheme to show.</p>}
         </div>
     )
 }

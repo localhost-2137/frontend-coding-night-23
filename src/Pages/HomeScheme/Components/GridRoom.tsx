@@ -1,19 +1,22 @@
-import { TbCircleFilled, TbX} from "react-icons/tb";
+import {TbCircleFilled, TbX} from "react-icons/tb";
 import {useEffect, useState} from "react";
 import {roomsAtom, squaresAtom} from "../../../Atoms.ts";
 import {useAtom} from "jotai";
 import useFetch from "../../../hooks/useFetch.tsx";
+import {selectedStatsRoomAtom} from "../../../Atoms.ts";
 
 interface GridRoomProps {
     id: number;
     title: string;
+    onClick?: () => void;
 }
 
-export default function GridRoom({id, title}: GridRoomProps) {
+export default function GridRoom({id, title, onClick}: GridRoomProps) {
 
     const [showDelete, setShowDelete] = useState(false)
     const [, setRooms] = useAtom(roomsAtom)
     const [, setSquares] = useAtom(squaresAtom)
+    const [selectedStatsRoom,] = useAtom(selectedStatsRoomAtom)
     const [data, setData] = useState<any>({
         temperature: 0,
         watthour: 0,
@@ -28,25 +31,26 @@ export default function GridRoom({id, title}: GridRoomProps) {
     }, 5000)
 
     useEffect(() => {
-        if(response) {
+        if (response) {
             setData(response)
             console.log(response)
         }
     }, [response]);
 
     return (
-        <div onMouseOver={() => {
-            setShowDelete(true)
-        }} onMouseOut={() => {
+        <div onClick={onClick}
+             onMouseOver={() => {
+                 setShowDelete(true)
+             }} onMouseOut={() => {
             setShowDelete(false)
         }}
-             className=" w-full h-full p-2">
+             className=" w-full h-full p-2 cursor-pointer">
             <div
-                className="relative shadow w-full h-full bg-gray-800 rounded-xl border-4 border-black flex flex-col justify-center items-center text-white">
+                className={`relative shadow w-full h-full bg-gray-800 rounded-xl ${selectedStatsRoom === id ? "border-amber-600" : "border-black"} border-4  flex flex-col justify-center items-center text-white`}>
                 <div className="flex flex-col gap-3">
                     <h3 className="text-xl text-center">{title}</h3>
                     <div className="flex text-green-600 items-center justify-center gap-2">
-                       <TbCircleFilled/>
+                        <TbCircleFilled/>
                         <p>online</p>
                     </div>
                     <div className="flex items-center gap-6">

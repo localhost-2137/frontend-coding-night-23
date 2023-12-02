@@ -2,16 +2,18 @@ import RoomBox from "../RoomBox.tsx";
 import {useLocation} from "react-router-dom";
 import Button from "../../../../Components/Button.tsx";
 import {Room} from "../../../../lib/interfaces.ts";
-import {selectedRoomAtom, roomsAtom} from "../../../../Atoms.ts";
+import {selectedRoomAtom, roomsAtom, helpModalAtom} from "../../../../Atoms.ts";
 import {useAtom} from "jotai";
 import {useEffect} from "react";
 import useFetch from "../../../../hooks/useFetch.tsx";
+import {TbHelp} from "react-icons/tb";
 
 export default function AddRoomSidebar() {
 
     const location = useLocation()
     const [selectedRoom, setSelectedRoom] = useAtom(selectedRoomAtom)
     const [rooms, setRooms] = useAtom(roomsAtom)
+    const [, setShowHelpModal] = useAtom(helpModalAtom)
     const {response, error, loading} = useFetch("room", {
         method: "GET",
         headers: {
@@ -29,7 +31,7 @@ export default function AddRoomSidebar() {
                     id: room.id,
                     icon_id: room.icon_id,
                     title: room.name,
-                    isLocked: false,
+                    isLocked: rooms.find((r: Room) => r.id === room.id)?.isLocked || false,
                 })
             })
 
@@ -50,7 +52,12 @@ export default function AddRoomSidebar() {
                     className={`px-3 py-1.5 rounded`} width={"w-full"}
                     to="/home-scheme/stats">Show stats</Button>
             </div>
-            <h2 className="text-2xl pt-4">Select room</h2>
+            <div className="flex justify-between items-center">
+                <h2 className="text-2xl pt-4">Select room</h2>
+                <span onClick={() => {
+                    setShowHelpModal(true)
+                }} className="text-2xl text-gray-400 cursor-pointer"><TbHelp/></span>
+            </div>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 py-6">
                 {loading && <p>Loading...</p>}
                 {error && <p>{error}</p>}
