@@ -46,3 +46,13 @@ a {
   background: linear-gradient(90deg, #cf9a11 0%, #9a3412 25%, #393a3a 50%);
   background-size: 400% 400%;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

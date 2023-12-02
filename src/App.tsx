@@ -10,56 +10,60 @@ import HomeScheme from "./Pages/HomeScheme/HomeScheme.tsx";
 import AddRoomSidebar from "./Pages/HomeScheme/Components/Sidebars/AddRoomSidebar.tsx";
 import LiveStatsSidebar from "./Pages/HomeScheme/Components/Sidebars/LiveStatsSidebar.tsx";
 import Rooms from "./Pages/Rooms/Rooms.tsx";
+import RoomInfo from "./Pages/RoomInfo/RoomInfo.tsx";
 
 
 export default function App() {
     const element = useRoutes([
-        {
+      {
+        path: "/",
+
+        element: <Header />,
+        children: [
+          {
             path: "/",
-
-            element: <Header/>,
+            element: <Home />,
+          },
+          {
+            path: "/home-scheme",
+            element: <HomeScheme />,
             children: [
-                {
-                    path: "/",
-                    element: <Home/>,
-                },
-                {
-                    path: "/home-scheme",
-                    element: <HomeScheme/>,
-                    children: [
-                        {
-                            path: "/home-scheme",
-                            element: <Navigate to={"/home-scheme/room"}/>,
-                        },
-                        {
-                            path: "/home-scheme/room",
-                            element: <AddRoomSidebar/>
-                        },
-                        {
-                            path: "/home-scheme/stats",
-                            element: <LiveStatsSidebar/>
-                        }
-                    ]
-                },
-                {
-                    path: "/rooms",
-                    element: <Rooms />,
-                },
-                {
-                    path: "/plan",
-                    element: <h1>Plan</h1>,
-                }
+              {
+                path: "/home-scheme",
+                element: <Navigate to={"/home-scheme/room"} />,
+              },
+              {
+                path: "/home-scheme/room",
+                element: <AddRoomSidebar />,
+              },
+              {
+                path: "/home-scheme/stats",
+                element: <LiveStatsSidebar />,
+              },
             ],
-        },
-        {
-            path: "/login",
-            element: <Login/>,
-        },
-        {
-            path: "/register",
-            element: <Register/>,
-        },
-
+          },
+          {
+            path: "/rooms",
+            element: <Rooms />,
+          },
+          {
+            path: "/room/:roomId",
+            element: <RoomInfo />,
+          },
+          {
+            path: "/plan",
+            element: <h1>Plan</h1>,
+          },
+        ],
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
     ]);
 
     const location = useLocation();
