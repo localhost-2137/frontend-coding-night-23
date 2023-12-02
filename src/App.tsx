@@ -6,11 +6,11 @@ import Header from "./Layout/Header";
 import Login from "./Pages/Auth/Login";
 import Register from "./Pages/Auth/Register";
 import Home from "./Pages/Home/Home";
-import HomeScheme from "./Pages/HomeScheme/HomeScheme.tsx";
-import AddRoomSidebar from "./Pages/HomeScheme/Components/Sidebars/AddRoomSidebar.tsx";
-import LiveStatsSidebar from "./Pages/HomeScheme/Components/Sidebars/LiveStatsSidebar.tsx";
-import Rooms from "./Pages/Rooms/Rooms.tsx";
-import RoomInfo from "./Pages/RoomInfo/RoomInfo.tsx";
+import HomeScheme from "./Pages/HomeScheme/HomeScheme";
+import AddRoomSidebar from "./Pages/HomeScheme/Components/Sidebars/AddRoomSidebar";
+import LiveStatsSidebar from "./Pages/HomeScheme/Components/Sidebars/LiveStatsSidebar";
+import Rooms from "./Pages/Rooms/Rooms";
+import RoomInfo from "./Pages/RoomInfo/RoomInfo";
 
 
 export default function App() {

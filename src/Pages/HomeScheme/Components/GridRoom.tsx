@@ -65,8 +65,8 @@ export default function GridRoom({id, title, onClick}: GridRoomProps) {
                         <p>online</p>
                     </div>
                     <div className="flex items-center gap-6">
-                        <p>{data.temperature} °C</p>
-                        <p>{data.humidity} %</p>
+                        <p>{data.temperature.toFixed(2)} °C</p>
+                        <p>{data.humidity.toFixed(2)} %</p>
                     </div>
                 </div>
                 {showDelete && <div
