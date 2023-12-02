@@ -45,14 +45,14 @@ export default function LiveStatsSidebar() {
                     to="/home-scheme/stats">Show stats</Button>
             </div>
             <h2 className="text-2xl pt-4">Live statistics</h2>
-            <div className="flex flex-col gap-6 py-6">
+            {selectedStatsRoom !== null && <div className="flex flex-col gap-6 py-6">
                 <p>Name: {data.name}</p>
                 <p>Device id: {data.id}</p>
                 <p>Temperature: {data.temperature}°C</p>
                 <p>Humidity: {data.humidity}%</p>
                 <p>Watthour: {data.watthour}Wh</p>
-            </div>
-            {selectedStatsRoom === null && <p className="py-6 text-gray-200">Select room from scheme to show.</p>}
+            </div>}
+            {selectedStatsRoom === null && <p className="py-6 text-gray-400">Select room from scheme to show.</p>}
         </div>
     )
 }

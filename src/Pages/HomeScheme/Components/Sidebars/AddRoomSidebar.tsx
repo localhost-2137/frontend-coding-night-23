@@ -60,7 +60,8 @@ export default function AddRoomSidebar() {
             </div>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 py-6">
                 {loading && <p>Loading...</p>}
-                {error && <p>{error}</p>}
+                {error && <p className="text-red-700">{error}</p>}
+                {rooms.length === 0 && <p>No rooms found</p>}
                 {rooms.map((room) => (
                     <RoomBox isLocked={room.isLocked} active={selectedRoom && selectedRoom.id === room.id || false}
                              iconId={room.icon_id}
