@@ -47,7 +47,7 @@ export default function Rooms() {
 
   useEffect(() => {
     fetchRooms();
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       fetchRooms();
     }, 10000);
 
@@ -66,7 +66,10 @@ export default function Rooms() {
         />
       )}
       <div className="w-full flex items-center justify-center flex-wrap gap-8 my-16 px-8">
-        <TbRefresh className="absolute top-7 right-60 text-gray-100 text-4xl cursor-pointer" onClick={fetchRooms} />
+        <TbRefresh
+          className="absolute top-7 right-60 text-gray-100 text-4xl cursor-pointer"
+          onClick={fetchRooms}
+        />
         <Button
           type="alt"
           className="absolute right-8 top-4 !w-48"
@@ -78,7 +81,9 @@ export default function Rooms() {
           Rooms
         </h2>
         <div className="w-full flex items-center justify-center flex-wrap gap-8 my-16 px-8">
-          {isFetching ? <Loader width="150" /> : rooms.length ? (
+          {isFetching ? (
+            <Loader width="150" />
+          ) : rooms.length ? (
             <AnimatePresence>
               {rooms.map((room: Room, i: number) => {
                 return (
