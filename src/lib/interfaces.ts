@@ -3,6 +3,15 @@ export interface SelectedRoom {
     title: string;
 }
 
+export interface RoomStats {
+    id: number;
+    name: string;
+    temperature: number;
+    humidity: number;
+    watthour: number;
+    lastpresence: string;
+}
+
 export interface Room {
     id: number;
     title: string;

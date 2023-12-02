@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {roomsAtom, squaresAtom} from "../../../Atoms.ts";
 import {useAtom} from "jotai";
 import useFetch from "../../../hooks/useFetch.tsx";
-import {selectedStatsRoomAtom} from "../../../Atoms.ts";
+import {selectedStatsRoomAtom, actualStatsRoomAtom} from "../../../Atoms.ts";
 
 interface GridRoomProps {
     id: number;
@@ -13,6 +13,7 @@ interface GridRoomProps {
 
 export default function GridRoom({id, title, onClick}: GridRoomProps) {
 
+    const [, setActualStatsRoom] = useAtom(actualStatsRoomAtom)
     const [showDelete, setShowDelete] = useState(false)
     const [, setRooms] = useAtom(roomsAtom)
     const [, setSquares] = useAtom(squaresAtom)
@@ -29,12 +30,21 @@ export default function GridRoom({id, title, onClick}: GridRoomProps) {
             "Content-Type": "application/json",
         },
         credentials: "include",
-    }, 5000)
+    }, 2000)
 
     useEffect(() => {
         if (response) {
             setData(response)
-            console.log(response)
+            if (selectedStatsRoom === id) {
+                setActualStatsRoom({
+                    temperature: response.temperature,
+                    humidity: response.humidity,
+                    watthour: response.watthour,
+                    lastpresence: response.lastpresence,
+                    id: response.id,
+                    name: response.name
+                })
+            }
         }
     }, [response]);
 

@@ -1,6 +1,6 @@
 import {atom} from "jotai";
 import getUserObject from "./lib/getUser";
-import {SelectedRoom, Room, Square} from "./lib/interfaces.ts";
+import {SelectedRoom, Room, Square, RoomStats} from "./lib/interfaces.ts";
 
 const userAtom = atom(getUserObject());
 
@@ -16,5 +16,6 @@ const squaresAtom = atom<Square[]>(Array.from({length: 25}, (_v, i) => ({
     }))
 );
 const helpModalAtom = atom(false);
+const actualStatsRoomAtom = atom<RoomStats | null>(null);
 
-export {userAtom, selectedRoomAtom, roomsAtom, squaresAtom, selectedStatsRoomAtom, helpModalAtom};
+export {userAtom, selectedRoomAtom, roomsAtom, squaresAtom, selectedStatsRoomAtom, helpModalAtom, actualStatsRoomAtom};

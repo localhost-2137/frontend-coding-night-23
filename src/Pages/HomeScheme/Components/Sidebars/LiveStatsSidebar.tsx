@@ -1,35 +1,14 @@
 import {useLocation} from "react-router-dom";
 import Button from "../../../../Components/Button.tsx";
-import useFetch from "../../../../hooks/useFetch.tsx";
-import {selectedStatsRoomAtom} from "../../../../Atoms.ts";
+import {selectedStatsRoomAtom, actualStatsRoomAtom} from "../../../../Atoms.ts";
 import {useAtom} from "jotai";
-import {useEffect, useState} from "react";
 
 export default function LiveStatsSidebar() {
 
     const [selectedStatsRoom,] = useAtom(selectedStatsRoomAtom)
-    const [data, setData] = useState({
-        name: "",
-        temperature: 0,
-        humidity: 0,
-        watthour: 0,
-        lastpresence: "",
-        id: 0,
-    })
-    const location = useLocation()
-    const {response} = useFetch(`room?id=${selectedStatsRoom}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        credentials: "include",
-    }, 5000)
+    const [actualStatsRoom,] = useAtom(actualStatsRoomAtom)
 
-    useEffect(() => {
-        if (response) {
-            setData(response)
-        }
-    }, []);
+    const location = useLocation()
 
     return (
         <div className="md:w-[25%] w-full bg-gray-800 md:h-full h-[30%] overflow-auto px-6 py-4 text-white md:border-r-2 md:border-r-amber-600
@@ -45,12 +24,12 @@ export default function LiveStatsSidebar() {
                     to="/home-scheme/stats">Show stats</Button>
             </div>
             <h2 className="text-2xl pt-4">Live statistics</h2>
-            {selectedStatsRoom !== null && <div className="flex flex-col gap-6 py-6">
-                <p>Name: {data.name}</p>
-                <p>Device id: {data.id}</p>
-                <p>Temperature: {data.temperature}°C</p>
-                <p>Humidity: {data.humidity}%</p>
-                <p>Watthour: {data.watthour}Wh</p>
+            {selectedStatsRoom !== null && actualStatsRoom !== null && <div className="flex flex-col gap-6 py-6">
+                <p>Name: {actualStatsRoom.name}</p>
+                <p>Device id: {actualStatsRoom.id}</p>
+                <p>Temperature: {actualStatsRoom.temperature}°C</p>
+                <p>Humidity: {actualStatsRoom.humidity}%</p>
+                <p>Watthour: {actualStatsRoom.watthour}Wh</p>
             </div>}
             {selectedStatsRoom === null && <p className="py-6 text-gray-400">Select room from scheme to show.</p>}
         </div>
