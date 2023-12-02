@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 
 export default function useFetch(path: string, options?: any) {
 
-    const [response, setResponse] = useState(null);
+    const [response, setResponse] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const url = `${import.meta.env.VITE_API_URL}/${path}`;
@@ -14,10 +14,13 @@ export default function useFetch(path: string, options?: any) {
             const res = await fetch(url, options);
 
             if (!res.ok) {
+                setLoading(false)
                 return setError(res.statusText);
             }
 
             const json = await res.json();
+            setLoading(false)
+            setError(null)
             setResponse(json);
         };
 

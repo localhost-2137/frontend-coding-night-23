@@ -5,35 +5,36 @@ import {Room} from "../../../../lib/interfaces.ts";
 import {selectedRoomAtom, roomsAtom} from "../../../../Atoms.ts";
 import {useAtom} from "jotai";
 import {useEffect} from "react";
-
-// DUMMY DATA
-let DUMMY_ROOMS: Room[] = [
-    {
-        id: 1,
-        title: "Living Room",
-        isLocked: false,
-    },
-    {
-        id: 2,
-        title: "Kitchen",
-        isLocked: false
-    },
-    {
-        id: 3,
-        title: "Bedroom",
-        isLocked: false,
-    },
-]
+import useFetch from "../../../../hooks/useFetch.tsx";
 
 export default function AddRoomSidebar() {
 
     const location = useLocation()
     const [selectedRoom, setSelectedRoom] = useAtom(selectedRoomAtom)
     const [rooms, setRooms] = useAtom(roomsAtom)
+    const {response, error, loading} = useFetch("room", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+    });
 
     useEffect(() => {
-        setRooms([...DUMMY_ROOMS])
-    }, []);
+
+        if (response && response.length > 0) {
+            const roomsArr: Room[] = []
+            response.forEach((room: any) => {
+                roomsArr.push({
+                    id: room.id,
+                    title: room.name,
+                    isLocked: false,
+                })
+            })
+
+            setRooms([...roomsArr])
+        }
+    }, [response]);
 
     return (
         <div className="md:w-[25%] w-full bg-gray-800 md:h-full h-[30%] overflow-auto px-6 py-4 text-white md:border-r-2 md:border-r-amber-600
@@ -50,6 +51,8 @@ export default function AddRoomSidebar() {
             </div>
             <h2 className="text-2xl pt-4">Select room</h2>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 py-6">
+                {loading && <p>Loading...</p>}
+                {error && <p>{error}</p>}
                 {rooms.map((room) => (
                     <RoomBox isLocked={room.isLocked} active={selectedRoom && selectedRoom.id === room.id || false}
                              key={room.id}
