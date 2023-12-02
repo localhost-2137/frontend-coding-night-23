@@ -1,11 +1,14 @@
+import IconById from "../../../Components/IconById.tsx";
+
 interface RoomBoxProps {
     title: string;
     onClick?: () => void;
     active?: boolean;
     isLocked: boolean;
+    iconId?: number;
 }
 
-export default function RoomBox({title, onClick, active, isLocked}: RoomBoxProps) {
+export default function RoomBox({title, onClick, active, isLocked, iconId}: RoomBoxProps) {
 
     return (
         <div onClick={onClick}
@@ -13,8 +16,8 @@ export default function RoomBox({title, onClick, active, isLocked}: RoomBoxProps
              ${isLocked ? "opacity-50" : "opacity-100"}
              ${active ? "border-2 border-amber-600"
                  : "border-2 border-gray-600"} transition-all`}>
-            <div className="p-4 w-full">
-                <div className=" mx-auto border-2 border-white w-8 h-8"></div>
+            <div className="p-4 w-full flex justify-center">
+                <IconById id={iconId}/>
             </div>
             <p className={`${active ? "text-amber-600" : "text-white"}`}>{title}</p>
         </div>

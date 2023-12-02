@@ -27,6 +27,7 @@ export default function AddRoomSidebar() {
             response.forEach((room: any) => {
                 roomsArr.push({
                     id: room.id,
+                    icon_id: room.icon_id,
                     title: room.name,
                     isLocked: false,
                 })
@@ -55,6 +56,7 @@ export default function AddRoomSidebar() {
                 {error && <p>{error}</p>}
                 {rooms.map((room) => (
                     <RoomBox isLocked={room.isLocked} active={selectedRoom && selectedRoom.id === room.id || false}
+                             iconId={room.icon_id}
                              key={room.id}
                              title={room.title}
                              onClick={() => {

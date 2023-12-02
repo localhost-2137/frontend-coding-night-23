@@ -7,6 +7,7 @@ export interface Room {
     id: number;
     title: string;
     isLocked: boolean;
+    icon_id?: number;
 }
 
 export interface Square {
