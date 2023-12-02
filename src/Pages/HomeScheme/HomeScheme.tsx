@@ -5,6 +5,7 @@ import {Outlet} from "react-router-dom";
 import {selectedRoomAtom, roomsAtom, squaresAtom, selectedStatsRoomAtom, helpModalAtom} from "../../Atoms.ts";
 import {useAtom} from "jotai";
 import HelpModal from "./Components/HelpModal.tsx";
+import toast from "react-hot-toast";
 
 
 export default function HomeScheme() {
@@ -43,7 +44,7 @@ export default function HomeScheme() {
                                     })
                                     setSelectedRoom(null)
                                 } else {
-                                    console.error("No room selected")
+                                    toast.error("No room selected")
                                 }
                             }}/>
                     )
