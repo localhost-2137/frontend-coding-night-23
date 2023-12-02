@@ -108,7 +108,7 @@ export default function RoomInfo() {
   return (
     <div className="flex-1 flex flex-col w-2/3 gap-16 mx-auto py-8">
       <h1 className="text-4xl text-center roboto text-gray-100">
-        Room {roomData?.name}
+        {roomData?.name}
       </h1>
       <div className="flex items-center justify-between w-full">
         <img
