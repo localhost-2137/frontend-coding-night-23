@@ -15,13 +15,14 @@ import {
 } from "react-icons/tb";
 import { useState } from "react";
 import Button from "../../../Components/Button";
+import toast from "react-hot-toast";
 
 interface Room {
   id: number;
   name: string;
   temperature: number;
   humidity: number;
-  imageId: number;
+  icon_id: number;
 }
 
 export default function Room({
@@ -38,9 +39,20 @@ export default function Room({
   const [isCelcius, setIsCelcius] = useState<boolean>(true);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  function deleteHandler() {
-    if (confirm(`Are you sure you want to delete ${room.name}?`)) {
-      console.log("deleted");
+  async function deleteHandler() {
+    let res = await fetch(`${import.meta.env.VITE_API_URL}/room/${room.id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+    let id = toast.loading("Deleting room...");
+    if (res.status >= 400) {
+      toast.error("Something went wrong!", { id });
+      return;
+    } else {
+      toast.success("Room deleted successfully!", { id });
+      setTimeout(() => {
+        window.location.reload();
+      }, 750);
     }
   }
 
@@ -55,15 +67,15 @@ export default function Room({
       key={room.id}
       style={{
         backgroundImage: `url(${
-          room.imageId === 1
+          room.icon_id === 1
             ? one
-            : room.imageId === 2
+            : room.icon_id === 2
             ? two
-            : room.imageId === 3
+            : room.icon_id === 3
             ? three
-            : room.imageId === 4
+            : room.icon_id === 4
             ? four
-            : room.imageId === 5
+            : room.icon_id === 5
             ? five
             : six
         })`,
@@ -109,12 +121,12 @@ export default function Room({
           <TbThermometer />
           Temperature:{" "}
           {isCelcius
-            ? room.temperature + "°C"
-            : room.temperature * 1.8 + 32 + "°F"}
+            ? room.temperature.toFixed(1) + "°C"
+            : (room.temperature * 1.8 + 32).toFixed(1) + "°F"}
         </p>
         <p className="flex items-center gap-4 text-2xl text-white mt-4">
           <TbDropletHalf2Filled />
-          Humidity: {room.humidity}%
+          Humidity: {room.humidity.toFixed(1)}%
         </p>
         <div className="w-3/5 mx-auto flex items-center rounded-full overflow-hidden mt-4 text-white border-2 border-bgLght">
           <p

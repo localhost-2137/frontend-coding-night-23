@@ -23,7 +23,7 @@ export default function Nav({
   user,
   logout,
 }: {
-  user: { email: string; id: string };
+  user: { email: string; id: string, firstname: string, lastname: string };
   logout: () => void;
 }) {
   const [isShown, setIsShown] = useState(false);
@@ -59,7 +59,7 @@ export default function Nav({
         <p className="sm:block hidden">Open menu</p>
         <TbMenu2 />
       </div>
-      {user.email ? (
+      {user.firstname ? (
         <div className="hidden lg:flex items-center gap-8 roboto text-3xl">
           <span className="flex items-center gap-2">
             <AvatarComponent
@@ -67,8 +67,8 @@ export default function Nav({
               username={user.email}
               size="small"
             />
-            <p className="max-w-[200px] text-ellipsis overflow-hidden">
-              {user.email}
+            <p className="max-w-[200px] text-ellipsis overflow-hidden text-gray-100">
+              {user.firstname + " " + user.lastname}
             </p>
           </span>
           <Button

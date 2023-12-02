@@ -8,7 +8,16 @@ import four from "../Assets/4.svg";
 import five from "../Assets/5.svg";
 import six from "../Assets/6.svg";
 import Input from "../../../Components/Input";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import toast from "react-hot-toast";
+
+interface Room {
+  id: number;
+  name: string;
+  temperature?: number;
+  humidity?: number;
+  icon_id: number;
+}
 
 export default function UpsertRoomModal({
   setIsUserUpsertingRoom,
@@ -16,16 +25,71 @@ export default function UpsertRoomModal({
   setEditingRoomIndex,
 }: {
   setIsUserUpsertingRoom: (arg: boolean) => void;
-  data?: { name: string; deviceCode: string; imageId: number; id: number };
+  data?: Room;
   setEditingRoomIndex: (arg: number) => void;
 }) {
-  const [chosenImage, setChosenImage] = useState<number>(data?.imageId || 1);
+  const [chosenImage, setChosenImage] = useState<number>(data?.icon_id || 1);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const deviceCodeRef = useRef<HTMLInputElement>(null);
+
+  async function updateRoom() {
+    let res = await fetch(`${import.meta.env.VITE_API_URL}/room`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: data?.id,
+        name: nameRef.current?.value,
+        icon_id: chosenImage,
+      }),
+      credentials: "include",
+    });
+    let toastId = toast.loading("Editing room...");
+    if (res.status >= 400) {
+      toast.error("Something went wrong!", { id: toastId });
+      return;
+    } else {
+      toast.success("Room edited successfully!", { id: toastId });
+      setIsUserUpsertingRoom(false);
+      setEditingRoomIndex(-1);
+    }
+  }
+
+  async function addRoom() {
+    let res = await fetch(`${import.meta.env.VITE_API_URL}/room`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        name: nameRef.current?.value,
+        device_id: +(deviceCodeRef.current?.value || 0),
+        icon_id: chosenImage,
+      }),
+    });
+    let toastId = toast.loading("Adding room...");
+    let fetchData = await res.json();
+    if (fetchData.code >= 400) {
+      toast.error("Something went wrong!", { id: toastId });
+      return;
+    } else {
+      toast.success("Room added successfully!", { id: toastId });
+      setIsUserUpsertingRoom(false);
+      setEditingRoomIndex(-1)
+    }
+  }
 
   function saveHandler() {
+    if (!nameRef.current?.value || !deviceCodeRef.current?.value) {
+      toast.error("Please fill all the fields!");
+      return;
+    }
     if (data?.name) {
-      console.log("edited");
+      updateRoom();
     } else {
-      console.log("added");
+      addRoom();
     }
   }
 
@@ -52,11 +116,14 @@ export default function UpsertRoomModal({
             placeholder="Room name"
             containerClassName="xl:!w-2/3 lg:w-1/3 sm:w-1/2 w-full"
             value={data?.name || ""}
+            ref={nameRef}
           />
           <Input
             placeholder="Device code"
             containerClassName="xl:!w-2/3 lg:w-1/3 sm:w-1/2 w-full"
-            value={data?.deviceCode || ""}
+            value={`${data?.id || ""}`}
+            type="number"
+            ref={deviceCodeRef}
           />
           <div className="flex items-center gap-4 justify-center flex-wrap">
             <input
@@ -114,7 +181,11 @@ export default function UpsertRoomModal({
               className="w-12 h-12 appearance-none bg-[length:24px_24px] bg-no-repeat cursor-pointer rounded-full checked:border-amber-500 border-bgLght border-2 bg-center"
             />
           </div>
-          <Button type="default" className="xl:!w-2/3 lg:w-1/3 sm:w-1/2 w-full" onClick={saveHandler}>
+          <Button
+            type="default"
+            className="xl:!w-2/3 lg:w-1/3 sm:w-1/2 w-full"
+            onClick={saveHandler}
+          >
             <TbDeviceFloppy />
             {data?.name ? "Save Room" : "Add Room"}
           </Button>

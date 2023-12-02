@@ -21,6 +21,6 @@ export default function AvatarComponent(props: {
   }, [props.size, props.userId]);
 
   return (
-    <Avatar name={props.username} size={String(avatarSize)} round={true} />
+    <Avatar name={props.username} size={String(avatarSize)} round={true} className="roboto" />
   );
 }
