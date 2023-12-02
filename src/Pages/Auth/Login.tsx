@@ -1,5 +1,6 @@
 import {Link, useNavigate} from "react-router-dom";
 import {motion, useIsPresent} from "framer-motion";
+import {jwtDecode} from "jwt-decode";
 import background from "./graphics/loginBackground.jpg";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
@@ -10,6 +11,7 @@ import {userAtom} from "../../Atoms";
 import getUserObject from "../../lib/getUser";
 import {TbArrowLeft} from "react-icons/tb";
 import {ThreeDots} from "react-loader-spinner";
+import {createCookie} from "../../lib/cookie.ts";
 
 export default function Login() {
     const isPresent = useIsPresent();
@@ -35,19 +37,23 @@ export default function Login() {
             headers: {
                 "Content-Type": "application/json",
             },
-            credentials: "include",
             body: JSON.stringify({
                 email: emailRef.current?.value,
                 password: passwordRef.current?.value,
             }),
         })
-            .then((res) => res.json())
+            .then((res) => {
+                return res.text()
+            })
             .then((data) => {
-                if (data.statusCode >= 400) {
+                if (!data) {
                     setIsLoading(false);
                     toast.error("Invalid email or password!");
                     return;
                 } else {
+                    const decode = jwtDecode(data);
+                    console.log(decode);
+                    createCookie("user_info", {...decode}, 1)
                     toast.success("Logged in successfully!");
                     setUser(() => getUserObject());
                     setTimeout(() => {

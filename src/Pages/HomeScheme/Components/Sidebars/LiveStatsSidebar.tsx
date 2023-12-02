@@ -7,7 +7,7 @@ export default function LiveStatsSidebar() {
 
     return (
         <div className="md:w-[25%] w-full bg-gray-800 md:h-full h-[30%] overflow-auto px-6 py-4 text-white md:border-r-2 md:border-r-amber-600
-        border-b-2 border-b-amber-600">
+        border-b-2 border-b-amber-600 md:border-b-0">
             <div className="w-full flex flex-col xl:flex-row gap-4 justify-center items-center py-6">
                 <Button
                     type={location.pathname === "/home-scheme/room" ? "default" : "alt"} isLink={true}
