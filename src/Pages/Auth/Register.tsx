@@ -56,13 +56,14 @@ export default function Register() {
         lastname: names[1],
       }),
     })
-      .then((res) => res.json())
+      .then((res) => res.text())
       .then((data) => {
-        if (data.statusCode >= 400 && data.statusCode < 500) {
+        if (!data) {
           toast.error("Email or username already taken!");
           setIsLoading(false);
           return;
         } else {
+          console.log(data);
           toast.success("Registered successfully!");
           setTimeout(() => {
             setIsLoading(false);
